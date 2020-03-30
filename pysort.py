@@ -26,7 +26,7 @@ def sort(toSort):
                         max = el
                     if min > el:
                         min = el
-                except TypeError:
+		except TypeError:
 			pass
 	listSortingList = listStartSortingList
 	for i in range(min,max+1):
