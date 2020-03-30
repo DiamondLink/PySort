@@ -29,7 +29,7 @@ def sort(toSort):
                 except TypeError:
                     pass
 	
-	    listSortingList = listStartSortingList
+	listSortingList = listStartSortingList
         for i in range(min,max+1):
 	        listSortingList.append(str(i))
             
