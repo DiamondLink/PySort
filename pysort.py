@@ -27,10 +27,9 @@ def sort(toSort):
                     if min > el:
                         min = el
                 except TypeError:
-                    pass
-	
+			pass
 	listSortingList = listStartSortingList
-        for i in range(min,max+1):
+	for i in range(min,max+1):
 	        listSortingList.append(str(i))
             
 	    sortedList = []
