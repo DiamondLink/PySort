@@ -7,20 +7,43 @@ import time
 import io
 import traceback
 
-llettres="0123456789abcdefghijklmnopqrstuvwxyz"
+stringSortingList="0123456789abcdefghijklmnopqrstuvwxyz"
+listStartSortingList=list("abcdefghijklmnopqrstuvwxyz")
 
-continuer=True
-
-def sort(string):
-    exe=True
-    if type(string)!=str:
+def sort(toSort):
+    if type(toSort)!=str and type(toSort) != list:
+        raise AttributeError("Specified object to sort must be string or list")
         
-        print("""AttributeError in function sort : argument must be string""")
-        exe=False
+    if type(toSort)==list:
+        max=None
+        for el in toSort:
+            if max==None:
+                max = el
+                min = el
+            else:
+                try:
+                    if max < el:
+                        max = el
+                    if min > el:
+                        min = el
+                except TypeError:
+                    if type(el) != string:
+                        raise AttributeError("List to sort must contains int, float or str")
+                    
+	    listSortingList = listStartSortingList
+        for i in range(min,max+1):
+	        listSortingList.append(str(i))
+            
+	    sortedList = []
+	    for el in listSortingList:
+	        for element in toSort:
+	            if el == str(element).lower():
+                    sortedList.append(element)
+                    
+        return sortedList
 
 
-    if exe==True:
-        chronodeb=time.time ()
+    elif type(toSort) == str:
         listedeux=[]
         i=0
 
@@ -47,10 +70,6 @@ def sort(string):
 
 
         output="".join (list_str)
-
-        chronof=time.time ()
-    
-        return(output,chronof-chronodeb)
 
 if __name__ == "__main__":
 
