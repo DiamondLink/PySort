@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*
+#By DiamondLink
 import math
 import random
 import os
@@ -10,7 +11,8 @@ import traceback
 stringSortingList = "0123456789abcdefghijklmnopqrstuvwxyz"
 listStartSortingList = list("abcdefghijklmnopqrstuvwxyz")
 
-
+test="Test"
+test2="Test"
 def sort(toSort):
     if type(toSort) != str and type(toSort) != list:
         raise AttributeError("Specified object to sort must be string or list")
