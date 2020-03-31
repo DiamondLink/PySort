@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*
 #By DiamondLink
-#TEST
 import math
 import random
 import os
