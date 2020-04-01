@@ -8,13 +8,14 @@ import time
 import io
 import traceback
 
-stringSortingList = "0123456789abcdefghijklmnopqrstuvwxyz"
-listStartSortingList = list("abcdefghijklmnopqrstuvwxyz")
-#testman
-#atestagain
-def sort(toSort):
+def sort(toSort,onlySortRightTypeOfElements = False):  #Only type means that string will be ignored when sotring an array and int and float will be ignored when sorting a string 
     if type(toSort) != str and type(toSort) != list:
         raise AttributeError("Specified object to sort must be string or list")
+
+    if type(onlySortRightTypeOfElements) != bool:
+        raise AttributeError("onlySortRightTypeOfElements must be a boolean")
+
+    BaseSortingList = "abcdefghijklmnopqrstuvwxyz"
 
     if type(toSort) == list:
         max = None
@@ -30,53 +31,66 @@ def sort(toSort):
                         min = el
                 except TypeError:
                     pass
-            listSortingList = listStartSortingList
-            for i in range(min, max+1):
-                listSortingList.append(str(i))
+        
+        if onlySortRightTypeOfElements == False:
+            listSortingList = list(BaseSortingList)
+        else:
+            listSortingList = list()
+        for i in range(min, max+1):
+            listSortingList.append(str(i))
 
-            sortedList = []
-            for el in listSortingList:
-                print(el)
-                for element in toSort:
-                    print(element)
-                    if el == str(element).lower():
-                        sortedList.append(element)
-
-        return sortedList
+        Sorted = []
+        for el in listSortingList:
+            for element in toSort:
+                if el == str(element).lower():
+                    Sorted.append(element)
 
     elif type(toSort) == str:
-        listedeux = []
-        i = 0
+        Sorted = ""
 
-        sortedString = ""
+        if onlySortRightTypeOfElements == False:
+            BaseSortingList = "0123456789" + BaseSortingList
 
-        for element in toSort:
-            i += 1
-
-        list_str = [""]*i
-        i = 0
-
-        for element in stringSortingList:
+        for element in BaseSortingList:
             for el in toSort:
                 if el.lower() == element:
-                    sortedString += el
+                    Sorted += el
 
-        return sortedList
+    return Sorted
 
+def main():
+    import sys
+    import os
 
-if __name__ == "__main__":
+    try:
+        from colorama import Fore
+    except:
+        raise ImportError("Can't import colorama ! Make sure it's installed")
 
-    while continuer == True:
-        continuer = False
-        print("\n")
-        string = input("Enter string to sort out : ")
-        for element in string:
+    if sys.version_info[0] < 3:
+        raise EnvironmentError("Must be using Python 3")
 
-            if element not in llettres:
-                print("\n")
-                print("Only letter and number sorting is available")
-                print("\n")
-                continuer = True
-                break
+    print("\n{}Pysort : most efficient sorting algorithme ever !\n\n{}Chose sorting type :\n1 : String sorting\n2 : List / Array sorting\n".format(Fore.GREEN,Fore.RESET))
 
-    sort(string)
+    typeOf = input(">> ")
+    print("{}Note that special caracteres will be ignored{}".format(Fore.YELLOW,Fore.RESET))
+    elementToSort = input("Input element to sort [Array elements must be separated by a comma] : ")
+
+    print("{}Note that special caracteres will be ignored{}".format(Fore.YELLOW,Fore.RESET))
+
+    if typeOf == "2":
+        elementToSort = elementToSort.split(",")
+        for i in range(len(elementToSort)):
+            try:
+                elementToSort[i] = int(elementToSort[i])
+            except:
+                pass
+
+    elif typeOf != "1":
+        print("{}You must chose a valid option (1 or 2){}".format(Fore.RED,Fore.RESET))
+        sys.exit(0)
+
+    return(sort(elementToSort))
+
+if __name__=="__main__":
+    print(main())
