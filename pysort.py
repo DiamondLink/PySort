@@ -51,6 +51,7 @@ def sort(toSort,onlySortRightTypeOfElements = False):  #Only type means that str
             for element in toSort:
                 if el == str(element).lower():
                     Sorted.append(element)
+                    toSort.remove(element)
 
     elif type(toSort) == str:
         Sorted = ""
@@ -58,10 +59,11 @@ def sort(toSort,onlySortRightTypeOfElements = False):  #Only type means that str
         if onlySortRightTypeOfElements == False:    #SLOWER
             BaseSortingList = "0123456789" + BaseSortingList
 
-        for element in BaseSortingList:
-            for el in toSort:
-                if el.lower() == element:
+        for el in BaseSortingList:
+            for element in toSort:
+                if element.lower() == el:
                     Sorted += el
+                    toSort.remove(el)
 
     return Sorted
 
