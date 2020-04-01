@@ -7,6 +7,13 @@ import sys
 import time
 import io
 import traceback
+import time
+
+def funcExeAndTime(function, *args, **kwargs):
+    """Execute a fonction and get the execution time, usefull for testing the efficiency and a sorting algotithme"""
+    start = time.time()
+    function(*args, **kwargs)
+    return(time.time() - start)
 
 def sort(toSort,onlySortRightTypeOfElements = False):  #Only type means that string will be ignored when sotring an array and int and float will be ignored when sorting a string 
     if type(toSort) != str and type(toSort) != list:
@@ -32,9 +39,9 @@ def sort(toSort,onlySortRightTypeOfElements = False):  #Only type means that str
                 except TypeError:
                     pass
         
-        if onlySortRightTypeOfElements == False:
+        if onlySortRightTypeOfElements == False:    #SLOWER
             listSortingList = list(BaseSortingList)
-        else:
+        else:                                       #FASTER
             listSortingList = list()
         for i in range(min, max+1):
             listSortingList.append(str(i))
@@ -48,7 +55,7 @@ def sort(toSort,onlySortRightTypeOfElements = False):  #Only type means that str
     elif type(toSort) == str:
         Sorted = ""
 
-        if onlySortRightTypeOfElements == False:
+        if onlySortRightTypeOfElements == False:    #SLOWER
             BaseSortingList = "0123456789" + BaseSortingList
 
         for element in BaseSortingList:
@@ -70,7 +77,7 @@ def main():
     if sys.version_info[0] < 3:
         raise EnvironmentError("Must be using Python 3")
 
-    print("\n{}Pysort : most efficient sorting algorithme ever !\n\n{}Chose sorting type :\n1 : String sorting\n2 : List / Array sorting\n".format(Fore.GREEN,Fore.RESET))
+    print("\n{}Pysort : most efficient sorting algorithme ever ! (actually it's not the fastest but it doesn't matter)\n\n{}Chose sorting type :\n1 : String sorting\n2 : List / Array sorting\n".format(Fore.GREEN,Fore.RESET))
 
     typeOf = input(">> ")
     print("{}Note that special caracteres will be ignored{}".format(Fore.YELLOW,Fore.RESET))
